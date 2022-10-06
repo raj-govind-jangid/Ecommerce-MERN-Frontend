@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import {Helmet} from "react-helmet";   
 
 const MainLayout = (props) => {
   let { userType, isLogin } = props
@@ -424,13 +423,6 @@ const MainLayout = (props) => {
             </div>
         </div>
         </div>
-        <Helmet>
-            <link rel="stylesheet" type="text/css" href="./assets/lib/animate/animate.min.css" />
-            <link rel="stylesheet" type="text/css" href="./assets/lib/owlcarousel/assets/owl.carousel.min.css" />
-            <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
-            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        </Helmet>
     </div>
   )
 }

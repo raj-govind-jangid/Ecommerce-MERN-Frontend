@@ -1,6 +1,8 @@
 import Axios from 'axios';
 
-Axios.defaults.baseURL = `${process.env.REACT_APP_BACKEND_URL}/api/v1`;
+const apiUrl = process.env.REACT_APP_ENVIRONMENT == "PRODUCTION" ? process.env.REACT_APP_PRODUCTION_BACKEND_URL : process.env.REACT_APP_DEVELOPMENT_BACKEND_URL;
+
+Axios.defaults.baseURL = `${apiUrl}/api/v1`;
 
 Axios.interceptors.request.use(
     function(config) {
