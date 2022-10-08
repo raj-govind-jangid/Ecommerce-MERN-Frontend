@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 
 const MainLayout = (props) => {
   let { userType, isLogin } = props
+  useEffect(()=>{
+    require("../assets/lib/animate/animate.min.css");
+    require("../assets/lib/owlcarousel/assets/owl.carousel.min.css");
+    require("../assets/css/style.css");
+  })
   return (
     <div>
         <div className="container-fluid">
