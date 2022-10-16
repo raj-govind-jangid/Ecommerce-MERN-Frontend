@@ -1,16 +1,36 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import { removeErrorMessage, removeSuccessMessage } from '../store/message/actions';
 
 const MainLayout = (props) => {
   let { userType, isLogin } = props
+  const message = useSelector((state)=>state.message)
+  const dispatch = useDispatch();
+
   useEffect(()=>{
     require("../assets/lib/animate/animate.min.css");
     require("../assets/lib/owlcarousel/assets/owl.carousel.min.css");
     require("../assets/css/style.css");
-  })
+  },[])
+
+  useEffect(()=>{
+    if(message.successMessage !== null){
+        let successMessage = message.successMessage
+        toast.success(successMessage)
+        dispatch(removeSuccessMessage())
+    }
+    if(message.errorMessage !== null){
+        let errorMessage = message.errorMessage
+        toast.error(errorMessage)
+        dispatch(removeErrorMessage())
+    }
+  },[message.successMessage,message.errorMessage])
   return (
     <div>
         <div className="container-fluid">
+        <ToastContainer/>
         <div className="row bg-secondary py-1 px-xl-5">
             <div className="col-lg-6 d-none d-lg-block">
             <div className="d-inline-flex align-items-center h-100">

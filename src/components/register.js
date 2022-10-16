@@ -1,31 +1,20 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import axios from "axios";
-import user from '../apiList/user';
-import { ToastContainer, toast } from 'react-toastify';
+import {useDispatch} from "react-redux";
+import {callRegisterApi} from "../store/auth/actions"
 
 const Register = () => {
-
     const [request,setRequest] = useState({fullname: "", email:"", password:"",confirmPassword:""})
+
+    const dispatch = useDispatch();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if(request.password == request.confirmPassword){
-            await axios.post(user.register,request).then((data)=>{
-                setRequest({fullname: "", email:"", password:"", confirmPassword:""})
-                toast.success(data.data.message)
-            }).catch((err)=>{
-                toast.error(err.response.data.message)
-            })
-        }else{
-            toast.error("Password don't match")
-        }
-        
+        await dispatch(callRegisterApi(request));
     }
 
     return (
         <div className="container col-md-4">
-        <ToastContainer	/>
         <form onSubmit={handleSubmit}>
             <h2>Create Account</h2>
             <p className="lead">It's free and hardly takes more than 30 seconds.</p>

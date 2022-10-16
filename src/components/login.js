@@ -1,25 +1,24 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
-import user from '../apiList/user';
-import { ToastContainer, toast } from 'react-toastify';
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { callLoginApi } from '../store/auth/actions';
 
 const Login = () => {
-
     const [request,setRequest] = useState({email:"",password:""})
+    const auth = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await axios.post(user.login,request).then((data)=>{
-            toast.success(data.data.message)
-        }).catch((err)=>{
-            toast.error(err.response.data.message)
-        })
+        await dispatch(callLoginApi(request));
+        if(auth.isLoggedIn){
+            navigate("/")
+        }
     }
 
     return (
         <div className="container col-md-4">
-        <ToastContainer	/>
         <form onSubmit={handleSubmit}>
             <h2>Login here</h2>
             <p className="lead">Get Access to your account by entering to your credentials below</p>
