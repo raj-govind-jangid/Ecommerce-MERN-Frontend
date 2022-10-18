@@ -1,0 +1,10 @@
+version: "3"
+services:
+  local:
+    build:
+      context: .
+      dockerfile: Dockerfile.live
+    ports:
+      - "3211:3211"
+    volumes:
+      - ./src:/app/src

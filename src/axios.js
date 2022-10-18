@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-const apiUrl = process.env.REACT_APP_ENVIRONMENT == "PRODUCTION" ? process.env.REACT_APP_PRODUCTION_BACKEND_URL : process.env.REACT_APP_DEVELOPMENT_BACKEND_URL;
+const apiUrl = process.env.REACT_APP_BACKEND_URL;
 
 Axios.defaults.baseURL = `${apiUrl}/api/v1`;
 
